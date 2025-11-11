@@ -8,6 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Fachade<Integer> fachade = new Fachade<>(null);
+        int[] arr = new int[]{1,2,3,4,5};
+        Integer[] result = fachade.castingToWrappers(arr);
     }
 }

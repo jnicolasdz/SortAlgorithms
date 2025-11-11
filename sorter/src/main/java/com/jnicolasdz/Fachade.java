@@ -1,4 +1,4 @@
-package src.java.com.main.SortAlgorithms;
+package com.jnicolasdz;
 import java.util.Comparator;
 import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
@@ -8,7 +8,6 @@ public class Fachade<T extends Comparable<? super T>> {
 private Comparator<T> comparador;
 private SortAlgorithm<T> algorithm;
 
-
 public Fachade(Comparator<T> comparator) {
     if (comparator == null) {
         this.comparador = Comparator.naturalOrder();
@@ -17,17 +16,27 @@ public Fachade(Comparator<T> comparator) {
     }
 }
 
-private void castingToWrappers(Object elements) {
 
-    if (elements instanceof float[]) {
-        Float[] objetos = ArrayUtils.toObject(elements);
-    }
-    if (elements instanceof float[]) {
-        Float[] objetos = ArrayUtils.toObject(elements);
-    }
+    @SuppressWarnings("unchecked")
+public <H> T[] castingToWrappers(H primitiveArray) {
+    return (T[]) switch (primitiveArray) {
+        case int[] arr -> ArrayUtils.toObject(arr);
+        case double[] arr -> ArrayUtils.toObject(arr);
+        case long[] arr -> ArrayUtils.toObject(arr);
+        case float[] arr -> ArrayUtils.toObject(arr);
+        case short[] arr -> ArrayUtils.toObject(arr);
+        case byte[] arr -> ArrayUtils.toObject(arr);
+        case char[] arr -> ArrayUtils.toObject(arr);
+        case boolean[] arr -> ArrayUtils.toObject(arr);
+        case Object[] arr -> arr;
+        case null -> throw new IllegalArgumentException("Array cannot be null");
+        default -> throw new IllegalArgumentException(
+            "Unsupported array type: " + primitiveArray.getClass()
+        );
+    };
 }
-
  
+
 public T[] bubble(T[] elements) {
     algorithm = new Bubble<T>(this.comparador);
     return algorithm.sort(elements);

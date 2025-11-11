@@ -1,4 +1,4 @@
-package src.java.com.main.SortAlgorithms;
+package com.jnicolasdz;
 import java.util.Comparator;
 import java.util.Objects;
 
