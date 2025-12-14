@@ -27,14 +27,13 @@ public <H> T[] castingToWrappers(H primitiveArray) {
         case short[] arr -> ArrayUtils.toObject(arr);
         case byte[] arr -> ArrayUtils.toObject(arr);
         case char[] arr -> ArrayUtils.toObject(arr);
-        case boolean[] arr -> ArrayUtils.toObject(arr);
         case Object[] arr -> arr;
         case null -> throw new IllegalArgumentException("Array cannot be null");
         default -> throw new IllegalArgumentException(
             "Unsupported array type: " + primitiveArray.getClass()
         );
     };
-}
+
  
 
 public T[] bubble(T[] elements) {
